@@ -22,6 +22,7 @@ function drawSprite(sprite, x, y) {
         tileSize,
         tileSize
     );
+    // TEST
 }
 
 function draw() {
