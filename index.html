@@ -36,6 +36,9 @@
         x = y = 0;
 
         setupCanvas();
+        
+        generateLevel();
+        
         ctx.fillRect(0, 0, 30, 30);
 
         document.querySelector("html").onkeypress = function (e) {
@@ -52,6 +55,7 @@
                 x++;
             }
         };
+        
         setInterval(draw, 60);
     </script>
 </body>
