@@ -38,6 +38,10 @@
         setupCanvas();
         
         generateLevel();
+            
+        startingTile = randomPassableTile();
+        x = startingTile.x;
+        y = startingTile.y;
         
         ctx.fillRect(0, 0, 30, 30);
 
