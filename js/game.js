@@ -33,5 +33,9 @@ function draw() {
         }
     }
 
-    drawSprite(0, x, y);
+    for (let i = 0; i < monsters.length; i++) {
+        monsters[i].draw();
+    }
+
+    player.draw();
 }
