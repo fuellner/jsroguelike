@@ -1,5 +1,4 @@
-function setupCanvas()
-{
+function setupCanvas() {
     canvas = document.querySelector("canvas");
     ctx = canvas.getContext("2d");
 
@@ -25,19 +24,21 @@ function drawSprite(sprite, x, y) {
 }
 
 function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-    for (let i = 0; i < numTiles; i++) {
-        for (let j = 0; j < numTiles; j++) {
-            getTile(i, j).draw();
+    if (gameState == "running" || gameState == "dead") {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        for (let i = 0; i < numTiles; i++) {
+            for (let j = 0; j < numTiles; j++) {
+                getTile(i, j).draw();
+            }
         }
-    }
 
-    for (let i = 0; i < monsters.length; i++) {
-        monsters[i].draw();
-    }
+        for (let i = 0; i < monsters.length; i++) {
+            monsters[i].draw();
+        }
 
-    player.draw();
+        player.draw();
+    }
 }
 
 function tick() {
@@ -48,4 +49,29 @@ function tick() {
             monsters.splice(k, 1);
         }
     }
+
+    if (player.dead) {
+        gameState = "dead";
+    }
+}
+
+function showTitle() {
+    ctx.fillStyle = 'rgba(0,0,0,.75)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    gameState = "title";
+}
+
+function startGame() {
+    level = 1;
+    startLevel(startingHp);
+
+    gameState = "running";
+}
+
+function startLevel(playerHp) {
+    generateLevel();
+
+    player = new Player(randomPassableTile());
+    player.hp = playerHp;
 }
