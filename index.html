@@ -15,9 +15,7 @@
         margin-top: 50px;
     }
 </style>
-
 <body>
-
     <canvas></canvas>
     <script src="js/game.js"></script>
     <script src="js/map.js"></script>
@@ -46,6 +44,9 @@
         shakeY = 0;  
 
         setupCanvas();
+
+        initSounds();
+
         ctx.fillRect(0, 0, 30, 30);
 
         document.querySelector("html").onkeypress = function (e) {
