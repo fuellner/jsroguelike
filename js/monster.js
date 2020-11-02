@@ -128,6 +128,21 @@ class Player extends Monster {
             tick();
         }
     }
+
+    addSpell() {
+        let newSpell = shuffle(Object.keys(spells))[0];
+        this.spells.push(newSpell);
+    }
+
+    castSpell(index) {
+        let spellName = this.spells[index];
+        if (spellName) {
+            delete this.spells[index];
+            spells[spellName]();
+            playSound("spell");
+            tick();
+        }
+    }
 }
 
 class Bird extends Monster {
