@@ -92,7 +92,7 @@ function startGame() {
     gameState = "running";
 }
 
-function startLevel(playerHp) {
+function startLevel(playerHp, playerSpells) {
     spawnRate = 15;
     spawnCounter = spawnRate;  
     
@@ -100,7 +100,9 @@ function startLevel(playerHp) {
 
     player = new Player(randomPassableTile());
     player.hp = playerHp;
-
+    if (playerSpells) {
+        player.spells = playerSpells;
+    }
     randomPassableTile().replace(Exit);  
 }
 

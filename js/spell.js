@@ -19,5 +19,18 @@ spells = {
             monsters[i].move(randomPassableTile());
             monsters[i].teleportCounter = 2;
         }
+    },
+    MULLIGAN: function () {
+        startLevel(1, player.spells);
+    },
+    AURA: function () {
+        player.tile.getAdjacentNeighbors().forEach(function (t) {
+            t.setEffect(13);
+            if (t.monster) {
+                t.monster.heal(1);
+            }
+        });
+        player.tile.setEffect(13);
+        player.heal(1);
     }
 }
