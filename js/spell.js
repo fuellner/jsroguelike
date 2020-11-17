@@ -2,7 +2,7 @@ spells = {
     WOOP: function () {
         player.move(randomPassableTile());
     },
-    QUAKE: function() {
+    QUAKE: function () {
         for (let i = 0; i < numTiles; i++) {
             for (let j = 0; j < numTiles; j++) {
                 let tile = getTile(i, j);
@@ -12,7 +12,7 @@ spells = {
                 }
             }
         }
-    shakeAmount = 20;
+        shakeAmount = 20;
     },
     MAELSTROM: function () {
         for (let i = 0; i < monsters.length; i++) {
@@ -87,6 +87,53 @@ spells = {
             if (!player.spells[i]) {
                 player.spells[i] = player.spells[i - 1];
             }
+        }
+    },
+    BRAVERY: function () {
+        player.shield = 2;
+        for (let i = 0; i < monsters.length; i++) {
+            monsters[i].stunned = true;
+        }
+    },
+    BOLT: function () {
+        boltTravel(player.lastMove, 15 + Math.abs(player.lastMove[1]), 4);
+    },
+    CROSS: function () {
+        let directions = [
+            [0, -1],
+            [0, 1],
+            [-1, 0],
+            [1, 0]
+        ];
+        for (let k = 0; k < directions.length; k++) {
+            boltTravel(directions[k], 15 + Math.abs(directions[k][1]), 2);
+        }
+    },
+    EX: function () {
+        let directions = [
+            [-1, -1],
+            [-1, 1],
+            [1, -1],
+            [1, 1]
+        ];
+        for (let k = 0; k < directions.length; k++) {
+            boltTravel(directions[k], 14, 3);
+        }
+    }
+};
+
+function boltTravel(direction, effect, damage) {
+    let newTile = player.tile;
+    while (true) {
+        let testTile = newTile.getNeighbor(direction[0], direction[1]);
+        if (testTile.passable) {
+            newTile = testTile;
+            if (newTile.monster) {
+                newTile.monster.hit(damage);
+            }
+            newTile.setEffect(effect);
+        } else {
+            break;
         }
     }
 }

@@ -90,6 +90,10 @@ class Monster {
     }
 
     hit(damage) {
+        if (this.shield > 0) {
+            return;
+        }
+
         this.hp -= damage;
         if (this.hp <= 0) {
             this.die();
@@ -125,6 +129,10 @@ class Player extends Monster {
         super(tile, 0, 3);
         this.isPlayer = true;
         this.teleportCounter = 0;
+    }
+
+    update() {
+        this.shield--;
     }
 
     tryMove(dx, dy) {

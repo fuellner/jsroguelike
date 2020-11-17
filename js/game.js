@@ -60,6 +60,8 @@ function tick() {
         }
     }
 
+    player.update();
+
     if (player.dead) {
         addScore(score, false);
         gameState = "dead";
